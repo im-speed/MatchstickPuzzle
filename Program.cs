@@ -8,4 +8,7 @@ List<Puzzle> puzzles = new()
     new(new(new Addition(new Number(6), new Number(4)), new Number(4)), 1)
 };
 
-Console.WriteLine(puzzles[0].Shape);
+foreach (Puzzle puzzle in puzzles)
+{
+    puzzle.Start();
+}

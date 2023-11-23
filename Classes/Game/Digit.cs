@@ -56,6 +56,16 @@ internal class Digit
         }
     }
 
+    public List<List<IStick>> Sticks
+        => new()
+        {
+            new() {sticks[0]},
+            new() {sticks[1], sticks[2] },
+            new() {sticks[3]},
+            new() {sticks[4], sticks[5] },
+            new() {sticks[6]}
+        };
+
     public MultilineString Shape
     {
         get

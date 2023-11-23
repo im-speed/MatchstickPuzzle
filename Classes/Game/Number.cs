@@ -1,4 +1,5 @@
-﻿using MatchstickPuzzle.Classes.ValueTypes.MultilineString;
+﻿using MatchstickPuzzle.Classes.Game.Sticks;
+using MatchstickPuzzle.Classes.ValueTypes.MultilineString;
 
 namespace MatchstickPuzzle.Classes.Game;
 
@@ -38,6 +39,30 @@ internal class Number : IValue
             }
 
             return multilineString;
+        }
+    }
+
+    public List<List<IStick>> Sticks
+    {
+        get
+        {
+            List<List<IStick>> sticks = new();
+
+            foreach (Digit digit in digits)
+            {
+                if (sticks.Count == 0)
+                {
+                    sticks.AddRange(digit.Sticks);
+                    continue;
+                }
+
+                for (int i = 0; i < digit.Sticks.Count; i++)
+                {
+                    sticks[i].AddRange(digit.Sticks[i]);
+                }
+            }
+
+            return sticks;
         }
     }
 
