@@ -1,9 +1,8 @@
-﻿namespace MatchstickPuzzle.Classes.ValueTypes.MultilineString
+﻿namespace MatchstickPuzzle.Classes.ValueTypes.MultilineString;
+
+internal enum VerticalAlignment
 {
-    internal enum VerticalAlignment
-    {
-        Top,
-        Middle,
-        Bottom
-    }
+    Top,
+    Middle,
+    Bottom
 }

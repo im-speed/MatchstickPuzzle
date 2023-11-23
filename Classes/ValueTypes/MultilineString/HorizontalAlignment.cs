@@ -1,9 +1,8 @@
-﻿namespace MatchstickPuzzle.Classes.ValueTypes.MultilineString
+﻿namespace MatchstickPuzzle.Classes.ValueTypes.MultilineString;
+
+internal enum HorizontalAlignment
 {
-    internal enum HorizontalAlignment
-    {
-        Left,
-        Center,
-        Right,
-    }
+    Left,
+    Center,
+    Right,
 }

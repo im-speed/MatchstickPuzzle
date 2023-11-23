@@ -1,13 +1,12 @@
-﻿namespace MatchstickPuzzle.Classes.Menu
-{
-    internal interface IMenu
-    {
-        bool Opened { get; set; }
+﻿namespace MatchstickPuzzle.Classes.Menu;
 
-        void Open() { }
-        void Close()
-        {
-            Opened = false;
-        }
+internal interface IMenu
+{
+    bool Opened { get; set; }
+
+    void Open() { }
+    void Close()
+    {
+        Opened = false;
     }
 }

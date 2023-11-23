@@ -1,14 +1,13 @@
-﻿namespace MatchstickPuzzle.Classes.Menu
-{
-    internal class MenuOption
-    {
-        public string Text { get; set; }
-        public Action Action { get; set; }
+﻿namespace MatchstickPuzzle.Classes.Menu;
 
-        public MenuOption(string text, Action action)
-        {
-            Text = text;
-            Action = action;
-        }
+internal class MenuOption
+{
+    public string Text { get; set; }
+    public Action Action { get; set; }
+
+    public MenuOption(string text, Action action)
+    {
+        Text = text;
+        Action = action;
     }
 }
