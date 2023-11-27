@@ -1,8 +1,8 @@
 ﻿using MatchstickPuzzle.Classes.Menu.CloseActions;
+using MatchstickPuzzle.Classes.ValueTypes.MultilineString;
 
 namespace MatchstickPuzzle.Classes.Menu;
-
-internal class ListMenu : IMenu
+internal class GridMenu : IMenu
 {
     public bool Opened { get; set; }
     public List<MenuOption> Options { get; }
@@ -12,8 +12,9 @@ internal class ListMenu : IMenu
     public bool CloseAfterAction { get; set; } = true;
     public string OptionPrefix { get; set; } = " ";
     public string SelectedPrefix { get; set; } = ">";
-    public string OptionSuffix { get; set; } = "";
-    public string SelectedSuffix { get; set; } = "";
+    public string OptionSuffix { get; set; } = " ";
+    public string SelectedSuffix { get; set; } = "<";
+    public int Width { get; set; } = 15;
 
     private int _selected;
     public int Selected
@@ -21,14 +22,22 @@ internal class ListMenu : IMenu
         get => _selected;
         set
         {
-            if (0 <= value && value < Options.Count)
+            if (value < 0)
+            {
+                _selected = 0;
+            }
+            else if (value >= Options.Count)
+            {
+                _selected = Options.Count - 1;
+            }
+            else
             {
                 _selected = value;
             }
         }
     }
 
-    public ListMenu(List<MenuOption> options)
+    public GridMenu(List<MenuOption> options)
     {
         Options = options;
     }
@@ -41,10 +50,26 @@ internal class ListMenu : IMenu
             ConsoleExtension.WriteColoredLine(Message, ConsoleColor.Cyan);
         }
 
+        List<MultilineString> columns = new();
+
         for (int i = 0; i < Options.Count; i++)
         {
-            Console.WriteLine($"{(i == Selected ? SelectedPrefix : OptionPrefix)} {Options[i].Text}");
+            MultilineString option = new(
+                $"{(i == Selected ? SelectedPrefix : OptionPrefix)}" +
+                $" {Options[i].Text}" +
+                $" {(i == Selected ? SelectedSuffix : OptionSuffix)}");
+
+            if (i < Width)
+            {
+                columns.Add(option);
+            }
+            else
+            {
+                columns[i % Width] = columns[i % Width].CombineVertically(option, HorizontalAlignment.Center, 1);
+            }
         }
+
+        Console.WriteLine(MultilineString.Join(columns, VerticalAlignment.Top, " "));
     }
 
     public void Open()
@@ -66,12 +91,20 @@ internal class ListMenu : IMenu
                         CloseAction.Close(this);
                     break;
 
-                case ConsoleKey.UpArrow:
+                case ConsoleKey.LeftArrow:
                     Selected--;
                     break;
 
-                case ConsoleKey.DownArrow:
+                case ConsoleKey.RightArrow:
                     Selected++;
+                    break;
+
+                case ConsoleKey.UpArrow:
+                    Selected -= 15;
+                    break;
+
+                case ConsoleKey.DownArrow:
+                    Selected += 15;
                     break;
 
                 case ConsoleKey.Enter:
@@ -82,25 +115,5 @@ internal class ListMenu : IMenu
                     break;
             }
         }
-    }
-
-    public static bool YesOrNo(string message)
-    {
-        bool answer = false;
-        List<MenuOption> options = new()
-        {
-            new("Yes", () => answer = true),
-            new("No", () => answer = false)
-        };
-
-        ListMenu yesOrNo = new(options)
-        {
-            Message = message,
-            CloseWithEscape = true
-        };
-
-        yesOrNo.Open();
-
-        return answer;
     }
 }

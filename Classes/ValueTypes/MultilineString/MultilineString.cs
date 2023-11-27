@@ -178,4 +178,30 @@ internal class MultilineString
     {
         return Value;
     }
+
+    public static MultilineString Join(IEnumerable<MultilineString> values)
+        => Join(values, VerticalAlignment.Bottom);
+
+    public static MultilineString Join(IEnumerable<MultilineString> values, VerticalAlignment alignment)
+        => Join(values, alignment, " ");
+
+    public static MultilineString Join(IEnumerable<MultilineString> values, string separator)
+        => Join(values, VerticalAlignment.Bottom, separator);
+
+    public static MultilineString Join(IEnumerable<MultilineString> values, VerticalAlignment alignment, string seperator)
+    {
+        if (values.Count() == 0)
+        {
+            return new();
+        }
+
+        MultilineString result = values.First();
+
+        foreach (MultilineString value in values.Skip(1))
+        {
+            result = result.CombineHorizontally(value, alignment, seperator);
+        }
+
+        return result;
+    }
 }
