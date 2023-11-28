@@ -232,6 +232,14 @@ internal class Puzzle
                         stickX = x;
                         return;
                     }
+
+                    // Forces the selection to try both vertical sticks below/above a horizontal stick before continuing.
+                    if (y == start && widthScale > 1 && Sticks[y][x + 1].Empty == holdingStick)
+                    {
+                        stickY = y;
+                        stickX = x + 1;
+                        return;
+                    }
                 }
             }
 
