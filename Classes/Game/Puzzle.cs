@@ -67,9 +67,9 @@ internal class Puzzle
     {
         // Reset the puzzle
         moveHistory.Clear();
-        (stickX, stickY) = (0, 0);
         holdingStick = false;
         ResetSticks();
+        ChooseFirstStick();
 
         while (!Equal || holdingStick)
         {
@@ -136,6 +136,26 @@ internal class Puzzle
             for (int j = 0; j < originalLayout[i].Count; j++)
             {
                 Sticks[i][j].Empty = originalLayout[i][j];
+            }
+        }
+    }
+
+    private void ChooseFirstStick()
+    {
+        List<Tuple<int, int>> selectionPriorities = new()
+        {
+            new(0, 0),
+            new(0, 1),
+            new(1, 1)
+        };
+
+        foreach (Tuple<int, int> selection in selectionPriorities)
+        {
+            (stickX, stickY) = selection;
+
+            if (!Sticks[stickY][stickX].Empty)
+            {
+                return;
             }
         }
     }
