@@ -30,6 +30,9 @@ internal class Digit
         new() {true,  true,  true,  true,  false,  true,  true},
     };
 
+    /// <summary>
+    /// Returns the current value (0-9) of the digit, -1 if empty, or null if it is an invalid shape.
+    /// </summary>
     public int? Value
     {
         get
@@ -61,6 +64,9 @@ internal class Digit
         }
     }
 
+    /// <summary>
+    /// All seven sticks of the digit split into 5 rows.
+    /// </summary>
     public List<List<IStick>> Sticks
         => new()
         {
@@ -71,6 +77,9 @@ internal class Digit
             new() { sticks[6] }
         };
 
+    /// <summary>
+    /// Returns the multiline string representation of the object.
+    /// </summary>
     public MultilineString Shape
     {
         get

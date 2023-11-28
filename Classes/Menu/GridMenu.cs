@@ -2,6 +2,9 @@
 using MatchstickPuzzle.Classes.ValueTypes.MultilineString;
 
 namespace MatchstickPuzzle.Classes.Menu;
+/// <summary>
+/// A menu that displays the options in a grid with the specified width.
+/// </summary>
 internal class GridMenu : IMenu
 {
     public bool Opened { get; set; }
@@ -10,14 +13,34 @@ internal class GridMenu : IMenu
     public ICloseAction CloseAction { get; set; } = new StandardClose();
     public bool CloseWithEscape { get; set; } = false;
     public bool CloseAfterAction { get; set; } = true;
+
+    /// <summary>
+    /// Default: empty.
+    /// </summary>
     public string OptionPrefix { get; set; } = " ";
+
+    /// <summary>
+    /// Default: >.
+    /// </summary>
     public string SelectedPrefix { get; set; } = ">";
+
+    /// <summary>
+    /// Default: empty.
+    /// </summary>
     public string OptionSuffix { get; set; } = " ";
+
+    /// <summary>
+    /// Default: &lt;.
+    /// </summary>
     public string SelectedSuffix { get; set; } = "<";
+
+    /// <summary>
+    /// The amount of columns that the menu should have.
+    /// </summary>
     public int Width { get; set; } = 15;
 
     private int _selected;
-    public int Selected
+    private int Selected
     {
         get => _selected;
         set

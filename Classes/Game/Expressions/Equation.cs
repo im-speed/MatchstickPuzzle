@@ -9,9 +9,15 @@ internal class Equation : Expression
             "─────\n" +
             "─────");
 
+    /// <summary>
+    /// Returns the difference between the two sides.
+    /// </summary>
     public override double? Value
         => LeftValue.Value - RightValue.Value;
 
+    /// <summary>
+    /// Returns true if both sides of the equation are equal.
+    /// </summary>
     public bool Equal
         => Value == 0;
 

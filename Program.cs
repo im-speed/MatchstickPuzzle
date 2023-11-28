@@ -10,7 +10,8 @@ Console.OutputEncoding = System.Text.Encoding.UTF8;
 List<Puzzle> puzzles = new()
 {
     new Puzzle(new Equation(new Addition(new Number(6), new Number(4)), new Number(4)), 1),
-    new Puzzle(new Equation(new Subtraction(new Number(0), new Number(6)), new Number(3)), 1),
+    new Puzzle(new Equation(new Subtraction(new Number(6), new Number(6)), new Number(3)), 1),
+    new Puzzle(new Equation(new Subtraction(new Number(9), new Number(5)), new Number(8)), 1),
     new Puzzle(new Equation(new Addition(new Number(13), new Number(4)), new Number(12)), 2),
 };
 

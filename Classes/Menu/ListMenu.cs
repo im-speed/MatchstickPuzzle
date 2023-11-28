@@ -2,6 +2,9 @@
 
 namespace MatchstickPuzzle.Classes.Menu;
 
+/// <summary>
+/// A menu that displays the menu options in a vertical list.
+/// </summary>
 internal class ListMenu : IMenu
 {
     public bool Opened { get; set; }
@@ -10,13 +13,29 @@ internal class ListMenu : IMenu
     public ICloseAction CloseAction { get; set; } = new StandardClose();
     public bool CloseWithEscape { get; set; } = false;
     public bool CloseAfterAction { get; set; } = true;
+
+    /// <summary>
+    /// Default: empty
+    /// </summary>
     public string OptionPrefix { get; set; } = " ";
+
+    /// <summary>
+    /// Default: >
+    /// </summary>
     public string SelectedPrefix { get; set; } = ">";
+
+    /// <summary>
+    /// Default: empty
+    /// </summary>
     public string OptionSuffix { get; set; } = "";
+
+    /// <summary>
+    /// Default: empty
+    /// </summary>
     public string SelectedSuffix { get; set; } = "";
 
     private int _selected;
-    public int Selected
+    private int Selected
     {
         get => _selected;
         set
@@ -84,6 +103,11 @@ internal class ListMenu : IMenu
         }
     }
 
+    /// <summary>
+    /// Creates a temporary list menu to ask the user a yes or no question.
+    /// </summary>
+    /// <param name="message">What to ask the user.</param>
+    /// <returns>True if they said yes, false if no.</returns>
     public static bool YesOrNo(string message)
     {
         bool answer = false;

@@ -4,6 +4,9 @@ internal class MultilineString
 {
     private List<string> _value;
 
+    /// <summary>
+    /// The muliline string represented as a normal string.
+    /// </summary>
     public string Value
     {
         get
@@ -12,12 +15,21 @@ internal class MultilineString
             => _value = value.Split('\n').ToList();
     }
 
+    /// <summary>
+    /// The current amount of rows.
+    /// </summary>
     public int Rows
         => _value.Count;
 
+    /// <summary>
+    /// The length of the current longest row.
+    /// </summary>
     public int Width
         => _value.Max((row) => row.Length);
 
+    /// <summary>
+    /// Create an empty multiline string.
+    /// </summary>
     public MultilineString()
         : this("")
     {
@@ -28,15 +40,25 @@ internal class MultilineString
         _value = value.Split('\n').ToList();
     }
 
+    /// <inheritdoc cref="CombineHorizontally(MultilineString, VerticalAlignment, string)"/>
     public MultilineString CombineHorizontally(MultilineString other)
         => CombineHorizontally(other, VerticalAlignment.Bottom);
 
+    /// <inheritdoc cref="CombineHorizontally(MultilineString, VerticalAlignment, string)"/>
     public MultilineString CombineHorizontally(MultilineString other, VerticalAlignment alignment)
         => CombineHorizontally(other, alignment, " ");
 
+    /// <inheritdoc cref="CombineHorizontally(MultilineString, VerticalAlignment, string)"/>
     public MultilineString CombineHorizontally(MultilineString other, string separator)
         => CombineHorizontally(other, VerticalAlignment.Bottom, separator);
 
+    /// <summary>
+    /// Combines this multiline string with another horizontally without altering either of them.
+    /// </summary>
+    /// <param name="other">The multiline string to combine with.</param>
+    /// <param name="alignment">The alignment to use when aligning the multiline string with the fewest rows.</param>
+    /// <param name="separator">What string to put between the multiline strings on each row.</param>
+    /// <returns>A new combined muliline string.</returns>
     public MultilineString CombineHorizontally(MultilineString other, VerticalAlignment alignment, string separator)
     {
         MultilineString newString;
@@ -60,15 +82,25 @@ internal class MultilineString
         return newString;
     }
 
+    /// <inheritdoc cref="CombineVertically(MultilineString, HorizontalAlignment, int)"/>
     public MultilineString CombineVertically(MultilineString other)
         => CombineVertically(other, HorizontalAlignment.Left);
 
+    /// <inheritdoc cref="CombineVertically(MultilineString, HorizontalAlignment, int)"/>
     public MultilineString CombineVertically(MultilineString other, HorizontalAlignment alignment)
         => CombineVertically(other, alignment, 0);
 
+    /// <inheritdoc cref="CombineVertically(MultilineString, HorizontalAlignment, int)"/>
     public MultilineString CombineVertically(MultilineString other, int separatingRows)
         => CombineVertically(other, HorizontalAlignment.Left, separatingRows);
 
+    /// <summary>
+    /// Combines this multiline string with another vertically without altering either of them.
+    /// </summary>
+    /// <param name="other">The multiline string to combine with.</param>
+    /// <param name="alignment">The alignment to use when aligning the multiline string with the smallest width.</param>
+    /// <param name="separatingRows">How many empty rows to put between the multiline strings.</param>
+    /// <returns>A new combined muliline string.</returns>
     public MultilineString CombineVertically(MultilineString other, HorizontalAlignment alignment, int separatingRows)
     {
         MultilineString newString;
@@ -93,6 +125,14 @@ internal class MultilineString
         return newString;
     }
 
+    /// <summary>
+    /// Creates a new multiline string that is aligned as specified with empty rows.
+    /// </summary>
+    /// <param name="alignment">How to align the multiline string.</param>
+    /// <param name="rows">How many rows the new multiline string should have. Can not be lower than the current rows of the 
+    /// multiline string.</param>
+    /// <returns>The new aligned multiline string.</returns>
+    /// <exception cref="ArgumentOutOfRangeException"></exception>
     public MultilineString AlignVertically(VerticalAlignment alignment, int rows)
     {
         if (rows < Rows)
@@ -136,6 +176,13 @@ internal class MultilineString
         return newString;
     }
 
+    /// <summary>
+    /// Creates a new multiline string that is aligned as specified with spaces to make every row equal length.
+    /// </summary>
+    /// <param name="alignment">How to align the multiline string.</param>
+    /// <param name="width">How long each row should be. Can not be smaller than the current width of the multiline string.</param>
+    /// <returns>The new aligned multiline string.</returns>
+    /// <exception cref="ArgumentOutOfRangeException"></exception>
     public MultilineString AlignHorizontally(HorizontalAlignment alignment, int width)
     {
         if (width < Width)
@@ -174,23 +221,34 @@ internal class MultilineString
         return newString;
     }
 
+    /// <summary>
+    /// Returns Value.
+    /// </summary>
     public override string ToString()
     {
         return Value;
     }
 
+    /// <inheritdoc cref="Join(IEnumerable{MultilineString}, VerticalAlignment, string)"/>
     public static MultilineString Join(IEnumerable<MultilineString> values)
         => Join(values, VerticalAlignment.Bottom);
 
+    /// <inheritdoc cref="Join(IEnumerable{MultilineString}, VerticalAlignment, string)"/>
     public static MultilineString Join(IEnumerable<MultilineString> values, VerticalAlignment alignment)
         => Join(values, alignment, " ");
 
+    /// <inheritdoc cref="Join(IEnumerable{MultilineString}, VerticalAlignment, string)"/>
     public static MultilineString Join(IEnumerable<MultilineString> values, string separator)
         => Join(values, VerticalAlignment.Bottom, separator);
 
-    public static MultilineString Join(IEnumerable<MultilineString> values, VerticalAlignment alignment, string seperator)
+    /// <summary>
+    /// Combines all the values horizontally.
+    /// </summary>
+    /// <param name="values">A collection of all multiline strings to combine.</param>
+    /// <inheritdoc cref="CombineHorizontally(MultilineString, VerticalAlignment, string)"/>
+    public static MultilineString Join(IEnumerable<MultilineString> values, VerticalAlignment alignment, string separator)
     {
-        if (values.Count() == 0)
+        if (!values.Any())
         {
             return new();
         }
@@ -199,7 +257,7 @@ internal class MultilineString
 
         foreach (MultilineString value in values.Skip(1))
         {
-            result = result.CombineHorizontally(value, alignment, seperator);
+            result = result.CombineHorizontally(value, alignment, separator);
         }
 
         return result;

@@ -1,4 +1,7 @@
 ﻿namespace MatchstickPuzzle.Classes.Menu.CloseActions;
+/// <summary>
+/// Runs any additional actions specified and closes the menu.
+/// </summary>
 internal class StandardClose : ICloseAction
 {
     public List<Action> AdditionalActions { get; set; }

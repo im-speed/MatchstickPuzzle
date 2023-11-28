@@ -15,6 +15,9 @@ internal class Puzzle
     private int stickX = 0;
     private int stickY = 0;
 
+    /// <summary>
+    /// The table representation of all sticks in the equation.
+    /// </summary>
     private List<List<IStick>> Sticks
         => equation.Sticks;
 
@@ -30,24 +33,30 @@ internal class Puzzle
         }
     }
 
+    /// <summary>
+    /// True if the puzzle has been solved in the required amount of moves.
+    /// </summary>
     public bool Solved { get; set; }
 
+    /// <summary>
+    /// True if the equation has been solved, even if done in more moves than allowed.
+    /// </summary>
     public bool Equal
         => equation.Equal;
 
+    /// <inheritdoc cref="Expression.Shape"/>
     public MultilineString Shape
         => equation.Shape;
 
+    /// <summary>
+    /// Creates a puzzle that once started will let the player move around sticks to try and make the equation equal.
+    /// </summary>
+    /// <param name="equation">The equation to solve.</param>
+    /// <param name="moves">Max moves to solve the puzzle in.</param>
     public Puzzle(Equation equation, int moves)
-        : this(equation, moves, false)
-    {
-    }
-
-    public Puzzle(Equation equation, int moves, bool solved)
     {
         this.moves = moves;
         this.equation = equation;
-        Solved = solved;
         _selectedStick = Sticks[0][0];
 
         foreach (List<IStick> stickRow in Sticks)
@@ -63,6 +72,9 @@ internal class Puzzle
         }
     }
 
+    /// <summary>
+    /// Starts the puzzle and will run a loop until the puzzle is solved or the user exits.
+    /// </summary>
     public void Start()
     {
         // Reset the puzzle
