@@ -71,18 +71,8 @@ void PlayPuzzle(Puzzle puzzle)
         return;
     }
 
-    Console.Clear();
-
     if (!puzzle.Solved)
     {
-        Console.WriteLine(
-            $"Nice try!\n" +
-            $"But if you wish to beat the level you have to solve the puzzle in the specified amount of moves.\n\n" +
-            $"{puzzle.Shape}\n");
-
-        ConsoleExtension.WriteColoredLine("Press any key to continue!", ConsoleColor.Cyan);
-        Console.ReadKey(true);
-
         if (ListMenu.YesOrNo("Do you want to restart the same level?"))
         {
             PlayPuzzle(puzzle);
@@ -94,12 +84,6 @@ void PlayPuzzle(Puzzle puzzle)
 
     Puzzle? nextUnsolved = puzzles.Skip(puzzles.IndexOf(puzzle)).ToList().Find((puzzle) => !puzzle.Solved)
         ?? puzzles.Find((puzzle) => !puzzle.Solved);
-
-    ConsoleExtension.WriteColoredLine("Congratulations on beating the puzzle!\n", ConsoleColor.Green);
-    Console.WriteLine($"{puzzle.Shape}\n");
-
-    ConsoleExtension.WriteColoredLine("Press any key to continue!", ConsoleColor.Cyan);
-    Console.ReadKey(true);
 
     if (nextUnsolved == null)
     {

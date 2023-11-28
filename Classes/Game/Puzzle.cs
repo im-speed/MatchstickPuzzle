@@ -127,6 +127,31 @@ internal class Puzzle
         {
             Solved = true;
         }
+
+        FinishGame();
+    }
+
+    private void FinishGame()
+    {
+        Console.Clear();
+
+        if (moveHistory.Count < 0)
+        {
+            Console.WriteLine(
+                $"Nice try!\n" +
+                $"But if you wish to beat the level you have to solve the puzzle in the specified amount of moves.\n\n" +
+                $"{Shape}\n");
+
+            ConsoleExtension.WriteColoredLine("Press any key to continue!", ConsoleColor.Cyan);
+            Console.ReadKey(true);
+            return;
+        }
+
+        ConsoleExtension.WriteColoredLine("Congratulations on beating the puzzle!\n", ConsoleColor.Green);
+        Console.WriteLine($"{Shape}\n");
+
+        ConsoleExtension.WriteColoredLine("Press any key to continue!", ConsoleColor.Cyan);
+        Console.ReadKey(true);
     }
 
     private void ResetSticks()
