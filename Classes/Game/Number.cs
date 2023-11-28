@@ -11,7 +11,12 @@ internal class Number : IValue
     {
         get
         {
-            string number = string.Join("", digits.Select(digit => digit.Value.ToString()));
+            if (digits.Exists((digit) => digit.Value == null))
+            {
+                return null;
+            }
+
+            string number = string.Join("", digits.Select(digit => digit.Value == -1 ? "" : digit.Value.ToString()));
 
             if (int.TryParse(number, out int value))
             {

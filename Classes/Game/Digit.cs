@@ -36,6 +36,11 @@ internal class Digit
         {
             List<bool> currentShape = sticks.Select((stick) => !stick.Empty).ToList();
 
+            if (currentShape.All((stick) => !stick))
+            {
+                return -1;
+            }
+
             for (int i = 0; i < shapeLookup.Count; i++)
             {
                 bool matches = true;
