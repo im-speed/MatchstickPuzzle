@@ -5,7 +5,7 @@ internal class MultilineString
     private List<string> _value;
 
     /// <summary>
-    /// The muliline string represented as a normal string.
+    /// The multiline string represented as a normal string.
     /// </summary>
     public string Value
     {
@@ -27,6 +27,11 @@ internal class MultilineString
     public int Width
         => _value.Max((row) => row.Length);
 
+    /* 1: Overloading av konstruktorer
+     * 2: Här överlagras konstruktorn ifall man inte ger något initialt värde.
+     * 3: Syftet är helt enkelt att om man vill börja med en tom sträng finns det ingen anledning att behöva ange ett värde.
+     */
+
     /// <summary>
     /// Create an empty multiline string.
     /// </summary>
@@ -40,13 +45,20 @@ internal class MultilineString
         _value = value.Split('\n').ToList();
     }
 
+    /* 1: Overloading av instansmetoder
+     * 2: Här överlagras både CombineHorizontally och CombineVertically för olika kombinationer av parametrar.
+     * 3: Detta görs då det finns många situationer när man kanske inte behöver ange allt. T.ex. vill man inte
+     *    alltid separera strängerna eller så vet man att de har lika många rader / är lika breda och då inte behöver ange någon
+     *    alignment.
+     */
+
     /// <inheritdoc cref="CombineHorizontally(MultilineString, VerticalAlignment, string)"/>
     public MultilineString CombineHorizontally(MultilineString other)
         => CombineHorizontally(other, VerticalAlignment.Bottom);
 
     /// <inheritdoc cref="CombineHorizontally(MultilineString, VerticalAlignment, string)"/>
     public MultilineString CombineHorizontally(MultilineString other, VerticalAlignment alignment)
-        => CombineHorizontally(other, alignment, " ");
+        => CombineHorizontally(other, alignment, "");
 
     /// <inheritdoc cref="CombineHorizontally(MultilineString, VerticalAlignment, string)"/>
     public MultilineString CombineHorizontally(MultilineString other, string separator)

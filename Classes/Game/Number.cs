@@ -5,6 +5,11 @@ namespace MatchstickPuzzle.Classes.Game;
 
 internal class Number : IValue
 {
+    /* 1: Inkapsling / Informationsgömning
+     * 2: Här göms fältet digits undan och istället får man värderna genom Number:s egenskaper. 
+     * 3: Detta görs eftersom det inte finns någon anledning att hämta värderna direkt från en Digit 
+     *    utan de bör behandlas som om de satt íhop i ett tal, vilket är vad denna klass är till för.
+     */
     private readonly List<Digit> digits;
 
     public double? Value

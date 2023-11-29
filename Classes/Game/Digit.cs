@@ -30,6 +30,13 @@ internal class Digit
         new() {true,  true,  true,  true,  false,  true,  true},
     };
 
+    /* 1: Computed properties
+     * 2: Value är en beräknad egenskap som istället för att hålla ett värde kollar om den nuvarande
+     *    formen på siffran matchar ett av dem i lookup ovan.
+     * 3: Anledningen till att göra så är att värdet på Digit är inte lagrat som ett heltal, utan 
+     *    påverkas av vad användaren flyttar för tändstickor.
+     */
+
     /// <summary>
     /// Returns the current value (0-9) of the digit, -1 if empty, or null if it is an invalid shape.
     /// </summary>

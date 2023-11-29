@@ -18,6 +18,23 @@ internal interface IMenu
     /// </summary>
     string? Message { get; set; }
 
+    /* 1: Objektkomposition
+     * 2: Alla menyer har en CloseAction som kan kallas med CloseAction.Close(this) för att stänga
+     *    menyn och eventuellt göra ytterligare funktioner som att fråga ifall man vill stänga
+     *    menyn först.
+     * 3: Syftet är väl standarden för objektkomposition, att man slipper göra separata menyklasser
+     *    för dessa olika funktioner, eftersom menyena har ett sätt att stänga sig istället för att
+     *    de är ett sätt att stänga sig.
+     */
+
+    /* 1: Beroendeinjektion
+     * 2: CloseAction är beroendeinjektion då den bara behöver implementera gränssnittet och sedan
+     *    används CloseAction.Close() utan att menyn vet vad den gör.
+     * 3: Anledningen till att gör så är att menyn inte behöver mer än att sätta Opened = false.
+     *    Men man kan vilja ha flera sätt att stänga menyn som gör annat innan det, som inte skulle
+     *    vara praktiskt att ange i t.ex. boolska egenskaper.
+     */
+
     /// <summary>
     /// What to do when trying to close the menu.
     /// </summary>
