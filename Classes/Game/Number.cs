@@ -45,7 +45,7 @@ internal class Number : IValue
 
             foreach (Digit digit in digits.Skip(1))
             {
-                multilineString = multilineString.CombineHorizontally(digit.Shape);
+                multilineString = multilineString.CombineHorizontally(digit.Shape, " ");
             }
 
             return multilineString;
