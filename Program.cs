@@ -58,17 +58,11 @@ void OpenPuzzleMenu()
         {
             if (unlocked)
             {
+                puzzleMenu.Opened = false;
                 PlayPuzzle(puzzle);
-                puzzleMenu.CloseAction.Close(puzzleMenu);
             }
         }));
     }
-
-    GridMenu puzzleMenu = new(puzzleMenuOptions)
-    {
-        Message = "Choose a puzzle!",
-        CloseWithEscape = true
-    };
 
     SaveGameData();
     puzzleMenu.Open();
@@ -108,8 +102,10 @@ void PlayPuzzle(Puzzle puzzle)
     {
         PlayPuzzle(nextUnsolved);
     }
-
+    else
+    {
     OpenPuzzleMenu();
+}
 }
 
 void ViewHelp()
