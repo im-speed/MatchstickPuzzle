@@ -2,6 +2,11 @@
 
 namespace MatchstickPuzzle.Classes.Game.Expressions;
 
+/* 1: Arv av klasser
+ * 2: Alla uttryck ärver av klassen Expression
+ * 3: Det gör att uttrycken bara behöver implementera kod för att beräkna sitt Value och returnera
+ *    symbolen som skrivs ut mellan vänstra och högra värdena.
+ */
 internal class Addition : Expression
 {
     public override double? Value
