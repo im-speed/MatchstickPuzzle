@@ -115,11 +115,17 @@ void ViewHelp()
 {
     Console.Clear();
     Console.WriteLine(
-        "" +
+        "Rules:\n" +
+        "The game has many levels, each with an unique puzzle. For each puzzle you have a certain number of\n" +
+        "moves, shown at the top of the screen, to move the matchsticks around so that the equation shown is\n" +
+        "equal. You can play 3 levels more than those you have completed, meaning that if you are stuck\n" +
+        "you can try some other uncompleted stages.\n" +
+        "Good luck!\n" +
+        "\n" +
         "Controls:\n" +
         "WASD or ↑←↓→: Choose stick and navigate menus.\n" +
-        "SPACE or ENTER: Select stick or menu option." +
-        "ESCAPE: Exit/Go back." +
+        "SPACE or ENTER: Select stick or menu option.\n" +
+        "ESCAPE: Exit/Go back.\n" +
         "CTRL+Z: Undo move.\n");
     ConsoleExtension.WriteColoredLine("Press any key to go back!", ConsoleColor.Cyan);
     Console.ReadKey(true);
