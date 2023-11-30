@@ -9,17 +9,17 @@ internal class Puzzle
 {
     private readonly List<List<bool>> originalLayout = new();
     private readonly Equation equation;
-    private readonly int moves;
+    private readonly int maxMoves;
     private readonly List<Tuple<int, int>> moveHistory = new();
     private bool holdingStick;
     private int stickX = 0;
     private int stickY = 0;
 
-    /// <summary>
-    /// The table representation of all sticks in the equation.
-    /// </summary>
     private List<List<IStick>> Sticks
         => equation.Sticks;
+
+    private int Moves
+        => moveHistory.Count / 2;
 
     private IStick _selectedStick;
     private IStick SelectedStick
@@ -52,10 +52,10 @@ internal class Puzzle
     /// Creates a puzzle that once started will let the player move around sticks to try and make the equation equal.
     /// </summary>
     /// <param name="equation">The equation to solve.</param>
-    /// <param name="moves">Max moves to solve the puzzle in.</param>
-    public Puzzle(Equation equation, int moves)
+    /// <param name="maxMoves">Maximum moves to solve the puzzle in.</param>
+    public Puzzle(Equation equation, int maxMoves)
     {
-        this.moves = moves;
+        this.maxMoves = maxMoves;
         this.equation = equation;
         _selectedStick = Sticks[0][0];
 
@@ -88,7 +88,7 @@ internal class Puzzle
             SelectedStick = Sticks[stickY][stickX];
 
             Console.Clear();
-            Console.WriteLine($"Moves left: {moves - moveHistory.Count / 2}");
+            Console.WriteLine($"Moves left: {maxMoves - moveHistory.Count / 2}");
             ConsoleExtension.WriteColoredLine(
                 !holdingStick
                 ? "Select a stick to pick up!"
@@ -135,7 +135,7 @@ internal class Puzzle
             }
         }
 
-        if (moveHistory.Count >= 0)
+        if (Moves <= maxMoves)
         {
             Solved = true;
         }
@@ -147,7 +147,7 @@ internal class Puzzle
     {
         Console.Clear();
 
-        if (moveHistory.Count < 0)
+        if (Moves > maxMoves)
         {
             Console.WriteLine(
                 $"Nice try!\n" +
