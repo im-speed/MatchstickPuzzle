@@ -135,7 +135,7 @@ internal class Puzzle
             }
         }
 
-        if (moveHistory.Count / 2 > moves)
+        if (moveHistory.Count >= 0)
         {
             Solved = true;
         }
@@ -147,7 +147,7 @@ internal class Puzzle
     {
         Console.Clear();
 
-        if (moveHistory.Count / 2 > moves)
+        if (moveHistory.Count < 0)
         {
             Console.WriteLine(
                 $"Nice try!\n" +
