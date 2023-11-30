@@ -80,12 +80,15 @@ void PlayPuzzle(Puzzle puzzle)
 
     if (!puzzle.Solved)
     {
-        if (ListMenu.YesOrNo("Do you want to restart the same level?"))
+        if (ListMenu.YesOrNo("Do you want to retry the same level?"))
         {
             PlayPuzzle(puzzle);
         }
+        else
+        {
+            OpenPuzzleMenu();
+        }
 
-        OpenPuzzleMenu();
         return;
     }
 
