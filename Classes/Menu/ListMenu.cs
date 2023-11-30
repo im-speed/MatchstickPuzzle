@@ -78,27 +78,29 @@ internal class ListMenu : IMenu
         {
             WriteOptions();
 
-            switch (Console.ReadKey(true).Key)
+            ConsoleKeyInfo keyInfo = Console.ReadKey(true);
+
+            if (keyInfo.Key == ConsoleKey.Escape)
             {
-                case ConsoleKey.Escape:
-                    if (CloseWithEscape)
-                        CloseAction.Close(this);
-                    break;
-
-                case ConsoleKey.UpArrow:
-                    Selected--;
-                    break;
-
-                case ConsoleKey.DownArrow:
-                    Selected++;
-                    break;
-
-                case ConsoleKey.Enter:
-                case ConsoleKey.Spacebar:
-                    Options[Selected].Action();
-                    if (CloseAfterAction)
-                        CloseAction.Close(this);
-                    break;
+                if (CloseWithEscape)
+                    CloseAction.Close(this);
+            }
+            else if (keyInfo.Key == ConsoleKey.Enter
+                || keyInfo.Key == ConsoleKey.Spacebar)
+            {
+                Options[Selected].Action();
+                if (CloseAfterAction)
+                    CloseAction.Close(this);
+            }
+            else if (keyInfo.Key == ConsoleKey.UpArrow
+                || keyInfo.Key == ConsoleKey.W)
+            {
+                Selected--;
+            }
+            else if (keyInfo.Key == ConsoleKey.DownArrow
+                || keyInfo.Key == ConsoleKey.S)
+            {
+                Selected++;
             }
         }
     }
