@@ -39,7 +39,12 @@ startMenu.Open();
 
 void OpenPuzzleMenu()
 {
-    List<MenuOption> puzzleMenuOptions = new();
+    GridMenu puzzleMenu = new(new())
+    {
+        Message = "Choose a puzzle!",
+        CloseWithEscape = true,
+        CloseAfterAction = false
+    };
 
     foreach (Puzzle puzzle in puzzles)
     {
@@ -49,7 +54,14 @@ void OpenPuzzleMenu()
 
         string finalText = unlocked ? $"{puzzleIndex + 1}{checkMark}" : "╳";
 
-        puzzleMenuOptions.Add(new(finalText, () => PlayPuzzle(puzzle)));
+        puzzleMenu.Options.Add(new(finalText, () =>
+        {
+            if (unlocked)
+            {
+                PlayPuzzle(puzzle);
+                puzzleMenu.CloseAction.Close(puzzleMenu);
+            }
+        }));
     }
 
     GridMenu puzzleMenu = new(puzzleMenuOptions)
