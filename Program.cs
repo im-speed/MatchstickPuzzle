@@ -9,10 +9,26 @@ Console.OutputEncoding = System.Text.Encoding.UTF8;
 
 List<Puzzle> puzzles = new()
 {
+    // 6 + 4 = 4
     new Puzzle(new Equation(new Addition(new Number(6), new Number(4)), new Number(4)), 1),
+    // 3 + 1 = 3
+    new Puzzle(new Equation(new Addition(new Number(3), new Number(1)), new Number(3)), 1),
+    // 6 - 6 = 3
     new Puzzle(new Equation(new Subtraction(new Number(6), new Number(6)), new Number(3)), 1),
+    // 9 - 5 = 8
     new Puzzle(new Equation(new Subtraction(new Number(9), new Number(5)), new Number(8)), 1),
+    // 13 + 4 = 12
     new Puzzle(new Equation(new Addition(new Number(13), new Number(4)), new Number(12)), 2),
+    // 5 * 2 = 73
+    new Puzzle(new Equation(new Multiplication(new Number(5), new Number(2)), new Number(73)), 2),
+    // 6 + 3 = 1 + 1
+    new Puzzle(new Equation(new Addition(new Number(6), new Number(3)), new Addition(new Number(1), new Number(1))), 1),
+    // 4 * 7 = 2 + 3
+    new Puzzle(new Equation(new Multiplication(new Number(4), new Number(7)), new Addition(new Number(2), new Number(3))), 2),
+    // 5 - 3 = 2 * 9
+    new Puzzle(new Equation(new Subtraction(new Number(5), new Number(3)), new Multiplication(new Number(2), new Number(9))), 1),
+    // 78 / 3 = 5
+    new Puzzle(new Equation(new Division(new Number(78), new Number(3)), new Number(5)), 1),
 };
 
 GameData gameData = new();
@@ -107,8 +123,8 @@ void PlayPuzzle(Puzzle puzzle)
     }
     else
     {
-    OpenPuzzleMenu();
-}
+        OpenPuzzleMenu();
+    }
 }
 
 void ViewHelp()
