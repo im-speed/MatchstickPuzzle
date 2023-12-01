@@ -49,7 +49,8 @@ LoadGameData();
 List<MenuOption> startOptions = new()
 {
     new("Play", OpenPuzzleMenu),
-    new("Help", ViewHelp)
+    new("Help", ViewHelp),
+    new("Reset", ResetData)
 };
 
 ListMenu startMenu = new(startOptions)
@@ -156,6 +157,22 @@ void ViewHelp()
         "CTRL+Z: Undo move.\n");
     ConsoleExtension.WriteColoredLine("Press any key to go back!", ConsoleColor.Cyan);
     Console.ReadKey(true);
+}
+
+void ResetData()
+{
+    if (!ListMenu.YesOrNo("Are you sure you want to reset all progress?", true)
+        || !ListMenu.YesOrNo("Current progress can not be retrieved, are you sure?", true))
+    {
+        return;
+    }
+
+    foreach (Puzzle puzzle in puzzles)
+    {
+        puzzle.Solved = false;
+    }
+
+    SaveGameData();
 }
 
 void SaveGameData()

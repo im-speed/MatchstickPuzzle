@@ -110,7 +110,7 @@ internal class ListMenu : IMenu
     /// </summary>
     /// <param name="message">What to ask the user.</param>
     /// <returns>True if they said yes, false if no.</returns>
-    public static bool YesOrNo(string message)
+    public static bool YesOrNo(string message, bool defaultToNo = false)
     {
         bool answer = false;
         List<MenuOption> options = new()
@@ -124,6 +124,11 @@ internal class ListMenu : IMenu
             Message = message,
             CloseWithEscape = true
         };
+
+        if (defaultToNo)
+        {
+            yesOrNo.Selected = 1;
+        }
 
         yesOrNo.Open();
 
