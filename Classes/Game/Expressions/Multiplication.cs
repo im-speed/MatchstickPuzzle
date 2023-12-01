@@ -8,7 +8,10 @@ internal class Multiplication : Expression
         => LeftValue.Value * RightValue.Value;
 
     protected override MultilineString Symbol
-        => new("●");
+        => new(
+            "\\ /\n" +
+            " ╳ \n" +
+            "/ \\");
 
     public Multiplication(IValue leftValue, IValue rightValue)
         : base(leftValue, rightValue) { }
