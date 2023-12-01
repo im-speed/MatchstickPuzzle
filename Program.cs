@@ -29,6 +29,16 @@ List<Puzzle> puzzles = new()
     new Puzzle(new Equation(new Subtraction(new Number(5), new Number(3)), new Multiplication(new Number(2), new Number(9))), 1),
     // 78 / 3 = 5
     new Puzzle(new Equation(new Division(new Number(78), new Number(3)), new Number(5)), 1),
+    // 1 / 1 = 4
+    new Puzzle(new Equation(new Division(new Number(1), new Number(1)), new Number(4)), 2),
+    // 4 - 1 = 7 * 8
+    new Puzzle(new Equation(new Subtraction(new Number(4), new Number(1)), new Multiplication(new Number(7), new Number(8))), 2),
+    // 6 / 8 = 9
+    new Puzzle(new Equation(new Division(new Number(6), new Number(8)), new Number(9)), 2),
+    // 5 + 2 + 7 = 9
+    new Puzzle(new Equation(new Addition(new Addition(new Number(5), new Number(2)), new Number(7)), new Number(9)), 1),
+    // 8 * 3 + 8 = 5
+    new Puzzle(new Equation(new Addition(new Multiplication(new Number(8), new Number(3)), new Number(8)), new Number(5)), 2),
 };
 
 GameData gameData = new();
@@ -59,7 +69,8 @@ void OpenPuzzleMenu()
     {
         Message = "Choose a puzzle!",
         CloseWithEscape = true,
-        CloseAfterAction = false
+        CloseAfterAction = false,
+        Width = 10
     };
 
     foreach (Puzzle puzzle in puzzles)
