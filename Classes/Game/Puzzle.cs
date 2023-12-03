@@ -262,16 +262,14 @@ internal class Puzzle
 
     private void MoveVertically(int start, Func<int, bool> endCondition, int step)
     {
-        int xScopeIncrease = 0;
-
-        while (xScopeIncrease < Sticks.Max((row) => row.Count))
+        for (int xScopeIncrease = 0; xScopeIncrease < Sticks.Max((row) => row.Count); xScopeIncrease++)
         {
             for (int y = start; endCondition(y); y += step)
             {
-                for (int isNegative = -1; isNegative <= 1; isNegative += 2)
+                for (int xScopeDirection = -1; xScopeDirection <= 1; xScopeDirection += 2)
                 {
                     double widthScale = (double)Sticks[y].Count / Sticks[stickY].Count;
-                    int x = (int)(stickX * widthScale) + isNegative * xScopeIncrease;
+                    int x = (int)(stickX * widthScale) + xScopeDirection * xScopeIncrease;
 
                     if (x < 0 || Sticks[y].Count <= x)
                     {
@@ -294,8 +292,6 @@ internal class Puzzle
                     }
                 }
             }
-
-            xScopeIncrease++;
         }
     }
 }
