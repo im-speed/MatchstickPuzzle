@@ -131,7 +131,7 @@ internal class Puzzle
             else if (keyInfo.Key == ConsoleKey.Z
                 && keyInfo.Modifiers == ConsoleModifiers.Control)
             {
-                UndoMove();
+                UndoMoves(holdingStick ? 1 : 2);
             }
         }
 
@@ -202,11 +202,6 @@ internal class Puzzle
         moveHistory.Add(new(stickX, stickY));
         holdingStick = !holdingStick;
         SelectedStick.Empty = !SelectedStick.Empty;
-    }
-
-    private void UndoMove()
-    {
-        UndoMoves(holdingStick ? 1 : 2);
     }
 
     private void UndoMoves(int moves)
