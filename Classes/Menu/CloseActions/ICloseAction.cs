@@ -11,4 +11,10 @@ internal interface ICloseAction
     /// </summary>
     /// <param name="menu">The menu to close</param>
     void Close(IMenu menu);
+
+    /// <summary>
+    /// Run when closing a menu without user input.
+    /// </summary>
+    /// <param name="menu">The menu to close</param>
+    void QuickClose(IMenu menu);
 }

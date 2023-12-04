@@ -1,6 +1,6 @@
 ﻿namespace MatchstickPuzzle.Classes.Menu;
 
-internal class MenuOption
+internal class Option
 {
     /// <summary>
     /// The string that will be written in the menu.
@@ -14,7 +14,7 @@ internal class MenuOption
 
     /// <param name="text">The string that will be written in the menu.</param>
     /// <param name="action">The action to run when this option is chosen.</param>
-    public MenuOption(string text, Action action)
+    public Option(string text, Action action)
     {
         Text = text;
         Action = action;

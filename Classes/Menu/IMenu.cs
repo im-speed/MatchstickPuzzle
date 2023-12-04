@@ -1,4 +1,5 @@
 ﻿using MatchstickPuzzle.Classes.Menu.CloseActions;
+using MatchstickPuzzle.Classes.Menu.Styles;
 
 namespace MatchstickPuzzle.Classes.Menu;
 internal interface IMenu
@@ -11,7 +12,7 @@ internal interface IMenu
     /// <summary>
     /// All menu options.
     /// </summary>
-    List<MenuOption> Options { get; }
+    List<Option> Options { get; }
 
     /// <summary>
     /// The message shown above all menu options.
@@ -49,10 +50,11 @@ internal interface IMenu
     /// If true the menu will close after the user chooses any menu option.
     /// </summary>
     bool CloseAfterAction { get; set; }
-    string OptionPrefix { get; set; }
-    string SelectedPrefix { get; set; }
-    string OptionSuffix { get; set; }
-    string SelectedSuffix { get; set; }
+
+    /// <summary>
+    /// Sets the style for all menu options.
+    /// </summary>
+    IOptionStyle OptionStyle { get; set; }
 
     /// <summary>
     /// Opens the menu.

@@ -1,4 +1,5 @@
 ﻿using MatchstickPuzzle.Classes.Menu.CloseActions;
+using MatchstickPuzzle.Classes.Menu.Styles;
 
 namespace MatchstickPuzzle.Classes.Menu;
 
@@ -8,31 +9,12 @@ namespace MatchstickPuzzle.Classes.Menu;
 internal class ListMenu : IMenu
 {
     public bool Opened { get; set; }
-    public List<MenuOption> Options { get; }
+    public List<Option> Options { get; }
     public string? Message { get; set; }
     public ICloseAction CloseAction { get; set; } = new StandardClose();
     public bool CloseWithEscape { get; set; } = false;
     public bool CloseAfterAction { get; set; } = true;
-
-    /// <summary>
-    /// Default: empty
-    /// </summary>
-    public string OptionPrefix { get; set; } = " ";
-
-    /// <summary>
-    /// Default: >
-    /// </summary>
-    public string SelectedPrefix { get; set; } = ">";
-
-    /// <summary>
-    /// Default: empty
-    /// </summary>
-    public string OptionSuffix { get; set; } = "";
-
-    /// <summary>
-    /// Default: empty
-    /// </summary>
-    public string SelectedSuffix { get; set; } = "";
+    public IOptionStyle OptionStyle { get; set; } = new DefaultStyle("  ", "> ", "", "");
 
     private int _selected;
     private int Selected
@@ -47,7 +29,7 @@ internal class ListMenu : IMenu
         }
     }
 
-    public ListMenu(List<MenuOption> options)
+    public ListMenu(List<Option> options)
     {
         Options = options;
     }
@@ -62,7 +44,7 @@ internal class ListMenu : IMenu
 
         for (int i = 0; i < Options.Count; i++)
         {
-            Console.WriteLine($"{(i == Selected ? SelectedPrefix : OptionPrefix)} {Options[i].Text}");
+            Console.WriteLine(OptionStyle.Style(Options[i], i == Selected));
         }
     }
 
@@ -90,7 +72,7 @@ internal class ListMenu : IMenu
             {
                 Options[Selected].Action();
                 if (CloseAfterAction)
-                    CloseAction.Close(this);
+                    CloseAction.QuickClose(this);
             }
             else if (keyInfo.Key == ConsoleKey.UpArrow
                 || keyInfo.Key == ConsoleKey.W)
@@ -113,7 +95,7 @@ internal class ListMenu : IMenu
     public static bool YesOrNo(string message, bool defaultToNo = false)
     {
         bool answer = false;
-        List<MenuOption> options = new()
+        List<Option> options = new()
         {
             new("Yes", () => answer = true),
             new("No", () => answer = false)

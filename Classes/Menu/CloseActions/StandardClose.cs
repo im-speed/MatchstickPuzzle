@@ -20,4 +20,9 @@ internal class StandardClose : ICloseAction
 
         menu.Opened = false;
     }
+
+    public void QuickClose(IMenu menu)
+    {
+        Close(menu);
+    }
 }

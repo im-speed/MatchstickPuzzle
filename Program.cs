@@ -46,7 +46,7 @@ AppDataHandler appDataHandler = new("Mathsticks");
 LoadGameData();
 
 // Start menu
-List<MenuOption> startOptions = new()
+List<Option> startOptions = new()
 {
     new("Play", OpenPuzzleMenu),
     new("Help", ViewHelp),

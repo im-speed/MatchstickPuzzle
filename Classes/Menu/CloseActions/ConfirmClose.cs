@@ -20,12 +20,17 @@ internal class ConfirmClose : ICloseAction
     {
         if (ListMenu.YesOrNo(ConfirmMessage))
         {
-            foreach (Action action in AdditionalActions)
-            {
-                action();
-            }
-
-            menu.Opened = false;
+            QuickClose(menu);
         }
+    }
+
+    public void QuickClose(IMenu menu)
+    {
+        foreach (Action action in AdditionalActions)
+        {
+            action();
+        }
+
+        menu.Opened = false;
     }
 }

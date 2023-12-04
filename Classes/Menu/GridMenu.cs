@@ -1,4 +1,5 @@
 ﻿using MatchstickPuzzle.Classes.Menu.CloseActions;
+using MatchstickPuzzle.Classes.Menu.Styles;
 using MatchstickPuzzle.Classes.ValueTypes.MultilineString;
 
 namespace MatchstickPuzzle.Classes.Menu;
@@ -8,31 +9,12 @@ namespace MatchstickPuzzle.Classes.Menu;
 internal class GridMenu : IMenu
 {
     public bool Opened { get; set; }
-    public List<MenuOption> Options { get; }
+    public List<Option> Options { get; }
     public string? Message { get; set; }
     public ICloseAction CloseAction { get; set; } = new StandardClose();
     public bool CloseWithEscape { get; set; } = false;
     public bool CloseAfterAction { get; set; } = true;
-
-    /// <summary>
-    /// Default: empty.
-    /// </summary>
-    public string OptionPrefix { get; set; } = " ";
-
-    /// <summary>
-    /// Default: >.
-    /// </summary>
-    public string SelectedPrefix { get; set; } = ">";
-
-    /// <summary>
-    /// Default: empty.
-    /// </summary>
-    public string OptionSuffix { get; set; } = " ";
-
-    /// <summary>
-    /// Default: &lt;.
-    /// </summary>
-    public string SelectedSuffix { get; set; } = "<";
+    public IOptionStyle OptionStyle { get; set; } = new DefaultStyle("  ", "> ", "  ", " <");
 
     /// <summary>
     /// The amount of columns that the menu should have.
@@ -60,7 +42,7 @@ internal class GridMenu : IMenu
         }
     }
 
-    public GridMenu(List<MenuOption> options)
+    public GridMenu(List<Option> options)
     {
         Options = options;
     }
@@ -77,10 +59,7 @@ internal class GridMenu : IMenu
 
         for (int i = 0; i < Options.Count; i++)
         {
-            MultilineString option = new(
-                $"{(i == Selected ? SelectedPrefix : OptionPrefix)}" +
-                $" {Options[i].Text}" +
-                $" {(i == Selected ? SelectedSuffix : OptionSuffix)}");
+            MultilineString option = new(OptionStyle.Style(Options[i], i == Selected));
 
             if (i < Width)
             {
@@ -119,7 +98,7 @@ internal class GridMenu : IMenu
             {
                 Options[Selected].Action();
                 if (CloseAfterAction)
-                    CloseAction.Close(this);
+                    CloseAction.QuickClose(this);
             }
             else if (keyInfo.Key == ConsoleKey.LeftArrow
                 || keyInfo.Key == ConsoleKey.A)
