@@ -28,14 +28,6 @@ internal interface IMenu
      *    de är ett sätt att stänga sig.
      */
 
-    /* 1: Beroendeinjektion
-     * 2: CloseAction är beroendeinjektion då den bara behöver implementera gränssnittet och sedan
-     *    används CloseAction.Close() utan att menyn vet vad den gör.
-     * 3: Anledningen till att gör så är att menyn inte behöver mer än att sätta Opened = false.
-     *    Men man kan vilja ha flera sätt att stänga menyn som gör annat innan det, som inte skulle
-     *    vara praktiskt att ange i t.ex. boolska egenskaper.
-     */
-
     /// <summary>
     /// What to do when trying to close the menu.
     /// </summary>

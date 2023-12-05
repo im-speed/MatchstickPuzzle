@@ -53,6 +53,15 @@ List<Option> startOptions = new()
     new("Reset", ResetData)
 };
 
+/* 1: Beroendeinjektion
+ * 2: Här när startMenu instansieras används beroendeinjektion för att ge menyn en ConfirmClose
+ *    med en extra action att spara speldatan.
+ * 3: Anledningen till det är eftersom det normalt inte händer något mer än att menyn sätter
+ *    Opened = false. Men att stänga denna meny resulterar i att programmet stängs och därför ska
+ *    man bekräfta att man faktiskt vill lämna och om man gör det ska speldatan sparas en sista
+ *    gång.
+ */
+
 ListMenu startMenu = new(startOptions)
 {
     Message = "MATHSTICKS",
